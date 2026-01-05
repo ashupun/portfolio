@@ -135,37 +135,33 @@ export default function Projects() {
           <div className="w-full lg:w-[360px] flex-shrink-0 space-y-4 self-start">
             <About typing={false} />
           </div>
-          <div className="flex-1 flex gap-4">
-            <div className="flex-1">
-              <div className="mb-4">
-                <h1 className="text-2xl font-bold mb-1">Projects</h1>
-                <p className="text-sm text-[var(--muted)]">A collection of things I've built and worked on.</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5" style={{ gridAutoRows: 'minmax(320px, auto)' }}>
-                {currentProjects.map((project) => (
-                  <ProjectCard key={project.title} project={project} />
-                ))}
-              </div>
+          <div className="flex-1">
+            <div className="mb-4">
+              <h1 className="text-2xl font-bold mb-1">Projects</h1>
+              <p className="text-sm text-[var(--muted)]">A collection of things I've built and worked on.</p>
             </div>
-            {totalPages > 1 && (
-              <div className="flex flex-col items-center justify-center gap-2">
-                <button
-                  onClick={() => setPage(p => Math.max(0, p - 1))}
-                  disabled={page === 0}
-                  className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft />
-                </button>
-                <span className="text-sm text-[var(--muted)]">{page + 1} / {totalPages}</span>
-                <button
-                  onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-                  disabled={page === totalPages - 1}
-                  className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  <ChevronRight />
-                </button>
-              </div>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 content-start" style={{ gridAutoRows: 'minmax(320px, auto)', minHeight: '680px' }}>
+              {currentProjects.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <button
+                onClick={() => setPage(p => Math.max(0, p - 1))}
+                disabled={page === 0}
+                className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft />
+              </button>
+              <span className="text-sm text-[var(--muted)]">{page + 1} / {totalPages}</span>
+              <button
+                onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                disabled={page === totalPages - 1}
+                className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ChevronRight />
+              </button>
+            </div>
           </div>
         </div>
       </main>

@@ -11,6 +11,7 @@ import {
   GitHubGraph,
   LocalTime,
   Tools,
+  Interests,
 } from './components/widget';
 
 export default function Home() {
@@ -31,8 +32,11 @@ export default function Home() {
             <div className="col-span-1 row-span-2"><Skills /></div>
             <div className="col-span-2 row-span-2"><Blog /></div>
             <div className="col-span-1 row-span-2"><Playing /></div>
-            <div className="col-span-2"><Tools /></div>
-            <div className="col-span-2"><Projects /></div>
+            <div className="col-span-4 grid grid-cols-3 gap-4 md:gap-5">
+              <Tools />
+              <Interests />
+              <Projects />
+            </div>
           </div>
         </div>
       </main>

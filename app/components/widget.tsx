@@ -82,6 +82,12 @@ export function About({ typing = true }: { typing?: boolean }) {
           <a href="mailto:ashupun@outlook.com" className="text-[var(--pink)] hover:underline">ashupun@outlook.com</a>
         </p>
       </div>
+      <div className="border-t border-[var(--border)] pt-6 mt-6">
+        <p className="text-xs text-[var(--muted)]">
+          Inspired by{' '}
+          <a href="https://ana.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--pink)] hover:underline">ana.sh</a>
+        </p>
+      </div>
     </div>
   );
 }
@@ -189,6 +195,7 @@ export function Location() {
 
 export function Projects() {
   const [isDark, setIsDark] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -200,18 +207,51 @@ export function Projects() {
     return () => observer.disconnect();
   }, []);
 
+  const floatingIcons = [
+    { icon: '🚀', delay: 0, x: 15, y: 20 },
+    { icon: '💻', delay: 0.5, x: 75, y: 15 },
+    { icon: '⚡', delay: 1, x: 85, y: 70 },
+    { icon: '🎨', delay: 1.5, x: 10, y: 75 },
+    { icon: '✨', delay: 0.3, x: 50, y: 85 },
+  ];
+
   return (
-    <a href="/projects" className="card h-full flex flex-col cursor-pointer">
+    <a
+      href="/projects"
+      className="card h-full flex flex-col cursor-pointer group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="label">
         <Code /> Projects
-        <span className="ml-auto"><Arrow /></span>
+        <span className="ml-auto transition-transform duration-300 group-hover:translate-x-1"><Arrow /></span>
       </div>
-      <div className={`flex-1 rounded-xl flex items-center justify-center min-h-[120px] ${isDark ? 'bg-gradient-to-br from-amber-800/40 to-yellow-900/30' : 'bg-gradient-to-br from-pink-200/60 to-rose-100/40'}`}>
-        <div className="text-center">
-          <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-[var(--pink)]/20 flex items-center justify-center">
-            <GitHub />
-          </div>
-          <p className="text-sm font-medium">View All</p>
+      <div
+        className={`flex-1 rounded-xl flex items-center justify-center min-h-[120px] relative overflow-hidden transition-all duration-500 ${isDark ? 'bg-gradient-to-br from-amber-800/40 via-orange-900/30 to-yellow-900/30' : 'bg-gradient-to-br from-pink-200/60 via-rose-100/50 to-orange-100/40'}`}
+        style={{
+          backgroundSize: isHovered ? '200% 200%' : '100% 100%',
+          animation: isHovered ? 'gradient-shift 3s ease infinite' : 'none',
+        }}
+      >
+        {floatingIcons.map((item, i) => (
+          <span
+            key={i}
+            className="absolute text-lg transition-all duration-500"
+            style={{
+              left: `${item.x}%`,
+              top: `${item.y}%`,
+              opacity: isHovered ? 1 : 0,
+              transform: isHovered ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(10px)',
+              transitionDelay: `${item.delay * 0.1}s`,
+              animation: isHovered ? `float-bounce 2s ease-in-out ${item.delay}s infinite` : 'none',
+            }}
+          >
+            {item.icon}
+          </span>
+        ))}
+        <div className="text-center relative z-10">
+          <p className="text-sm font-medium transition-all duration-300 group-hover:scale-105">View All</p>
+          <p className="text-xs text-[var(--muted)] mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">8 projects</p>
         </div>
       </div>
     </a>
@@ -480,6 +520,50 @@ export function LocalTime() {
       <div className="flex-1 flex flex-col items-center justify-center">
         <p className="text-3xl font-bold text-[var(--pink)]">{time || '--:--'}</p>
         <p className="text-xs text-[var(--muted)] mt-1">London, UK</p>
+      </div>
+    </div>
+  );
+}
+
+export function Interests() {
+  const interests = [
+    { name: 'Gaming', color: '#8b5cf6' },
+    { name: 'Baking', color: '#f472b6' },
+    { name: 'Photography', color: '#06b6d4' },
+    { name: 'Anime', color: '#ef4444' },
+    { name: 'Travel', color: '#22c55e' },
+    { name: 'Coffee', color: '#f59e0b' },
+    { name: 'Digital Art', color: '#ec4899' },
+  ];
+  return (
+    <div className="card h-full">
+      <div className="label"><Heart /> Interests & Hobbies</div>
+      <div className="flex flex-wrap gap-2">
+        {interests.map((interest) => (
+          <span
+            key={interest.name}
+            className="px-3 py-1.5 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)] text-sm transition-all duration-300 cursor-default hover:scale-105"
+            style={{
+              ['--hover-color' as string]: interest.color,
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget;
+              el.style.backgroundColor = `${interest.color}20`;
+              el.style.borderColor = interest.color;
+              el.style.color = interest.color;
+              el.style.boxShadow = `0 0 12px ${interest.color}40`;
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget;
+              el.style.backgroundColor = '';
+              el.style.borderColor = '';
+              el.style.color = '';
+              el.style.boxShadow = '';
+            }}
+          >
+            {interest.name}
+          </span>
+        ))}
       </div>
     </div>
   );
