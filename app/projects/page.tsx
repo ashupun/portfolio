@@ -84,7 +84,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         <div className="flex items-center gap-2 min-w-0">
           {project.live && (
             <img
-              src={project.live === "https://ashupun.com" ? "/favicon.ico" : `https://www.google.com/s2/favicons?domain=${new URL(project.live).hostname}&sz=32`}
+              src={project.live === "https://ashupun.com" ? "/favicon.ico" : project.live === "https://sweethe.art" ? "/sweethearticon.png" : `https://www.google.com/s2/favicons?domain=${new URL(project.live).hostname}&sz=32`}
               alt=""
               className="w-4 h-4 flex-shrink-0"
             />
