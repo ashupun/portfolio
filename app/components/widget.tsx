@@ -91,7 +91,6 @@ export function About({ typing = true }: { typing?: boolean }) {
           <Star /> Fun Facts
         </div>
         <ul className="text-base md:text-sm space-y-2">
-          <li>• 23 years old</li>
           <li>• Cat lover =^..^=</li>
           <li>• Cupcake decorator</li>
           <li>• Aspiring coder</li>

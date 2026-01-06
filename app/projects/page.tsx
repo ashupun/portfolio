@@ -81,9 +81,18 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         />
       </div>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-lg md:text-base font-semibold line-clamp-1">
-          {project.title}
-        </h3>
+        <div className="flex items-center gap-2 min-w-0">
+          {project.live && (
+            <img
+              src={project.live === "https://ashupun.com" ? "/favicon.ico" : `https://www.google.com/s2/favicons?domain=${new URL(project.live).hostname}&sz=32`}
+              alt=""
+              className="w-4 h-4 flex-shrink-0"
+            />
+          )}
+          <h3 className="text-lg md:text-base font-semibold line-clamp-1">
+            {project.title}
+          </h3>
+        </div>
         <div className="flex gap-2 flex-shrink-0">
           {project.github && (
             <a
