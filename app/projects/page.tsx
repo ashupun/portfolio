@@ -1,29 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dock } from '../components/dock';
 import { About } from '../components/widget';
-import { GitHub, Globe } from '../components/icon';
+import { GitHub, Globe } from '../components/icons';
 
 const projects = [
   {
     title: 'Portfolio Website',
-    description: 'Personal portfolio built with Next.js and Tailwind CSS featuring a bento grid layout.',
+    description: 'My personal space on the web with a cozy bento grid layout.',
     tech: ['Next.js', 'Tailwind CSS', 'TypeScript'],
     github: 'https://github.com/ashupun/portfolio',
-    live: 'https://ashu.dev',
-    cover: '/projects/portfolio.png',
+    live: 'https://ashupun.com',
+    cover: '/portfolio.png',
   },
   {
     title: 'Weather App',
-    description: 'A minimal weather application with location-based forecasts and beautiful UI.',
+    description: 'Minimal weather app with location-based forecasts.',
     tech: ['React', 'OpenWeather API', 'CSS'],
     github: 'https://github.com/ashupun/weather-app',
     cover: '/projects/weather.png',
   },
   {
     title: 'Task Manager',
-    description: 'Full-stack task management app with drag-and-drop functionality.',
+    description: 'Drag-and-drop task management for staying organized.',
     tech: ['Next.js', 'Prisma', 'PostgreSQL'],
     github: 'https://github.com/ashupun/task-manager',
     live: 'https://tasks.ashu.dev',
@@ -31,14 +31,14 @@ const projects = [
   },
   {
     title: 'Chat Application',
-    description: 'Real-time chat application with rooms and direct messaging.',
+    description: 'Real-time chat with rooms and direct messaging.',
     tech: ['React', 'Socket.io', 'Node.js'],
     github: 'https://github.com/ashupun/chat-app',
     cover: '/projects/chat.png',
   },
   {
     title: 'E-commerce Store',
-    description: 'Modern e-commerce platform with cart, checkout, and payment integration.',
+    description: 'Modern shop with cart, checkout, and Stripe payments.',
     tech: ['Next.js', 'Stripe', 'Sanity'],
     github: 'https://github.com/ashupun/ecommerce',
     live: 'https://shop.ashu.dev',
@@ -46,41 +46,22 @@ const projects = [
   },
   {
     title: 'Blog Platform',
-    description: 'Markdown-based blog with syntax highlighting and dark mode support.',
+    description: 'Markdown blog with syntax highlighting and dark mode.',
     tech: ['Next.js', 'MDX', 'Tailwind CSS'],
     github: 'https://github.com/ashupun/blog',
     cover: '/projects/blog.png',
-  },
-  {
-    title: 'AI Image Generator',
-    description: 'Web app that generates images from text prompts using Stable Diffusion API.',
-    tech: ['Python', 'FastAPI', 'React'],
-    github: 'https://github.com/ashupun/ai-image-gen',
-    live: 'https://imagine.ashu.dev',
-    cover: '/projects/aiimage.png',
-  },
-  {
-    title: 'Spotify Stats',
-    description: 'Dashboard to visualize your Spotify listening habits and top tracks.',
-    tech: ['Next.js', 'Spotify API', 'Chart.js'],
-    github: 'https://github.com/ashupun/spotify-stats',
-    cover: '/projects/spotify.png',
   },
 ];
 
 function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <div className="card flex flex-col">
-      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)]">
-        <img
-          src={project.cover}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
+      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0">
+        <img src={project.cover} alt={project.title} className="w-full h-full object-cover" />
       </div>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-base font-semibold">{project.title}</h3>
-        <div className="flex gap-2">
+        <h3 className="text-lg md:text-base font-semibold line-clamp-1">{project.title}</h3>
+        <div className="flex gap-2 flex-shrink-0">
           {project.github && (
             <a href={project.github} className="text-[var(--muted)] hover:text-[var(--pink)] transition-colors">
               <GitHub />
@@ -93,10 +74,10 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
           )}
         </div>
       </div>
-      <p className="text-xs text-[var(--muted)] mb-3 flex-1 line-clamp-2">{project.description}</p>
-      <div className="flex flex-wrap gap-1.5">
+      <p className="text-base md:text-sm text-[var(--muted)] mb-3 flex-1 line-clamp-1">{project.description}</p>
+      <div className="flex flex-wrap gap-1.5 overflow-hidden max-h-6">
         {project.tech.map((t) => (
-          <span key={t} className="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)]">
+          <span key={t} className="text-xs md:text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)]">
             {t}
           </span>
         ))}
@@ -105,62 +86,53 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   );
 }
 
-function ChevronLeft() {
-  return (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-    </svg>
-  );
-}
-
-function ChevronRight() {
-  return (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-    </svg>
-  );
-}
-
 export default function Projects() {
   const [page, setPage] = useState(0);
-  const itemsPerPage = 6;
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const itemsPerPage = isMobile ? 2 : 6;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   const currentProjects = projects.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
 
+  const changePage = (newPage: number) => {
+    if (newPage === page || isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setPage(newPage);
+      setIsTransitioning(false);
+    }, 150);
+  };
+
+  const prevPage = () => changePage(Math.max(0, page - 1));
+  const nextPage = () => changePage(Math.min(totalPages - 1, page + 1));
+
   return (
-    <div className="min-h-screen pb-24 page-transition">
-      <Dock />
+    <div className="min-h-screen pb-24">
+      <Dock pagination={{ page, totalPages, onPrev: prevPage, onNext: nextPage, isTransitioning }} />
       <main className="max-w-[1800px] mx-auto px-4 md:px-8 pt-8">
-        <div className="flex flex-col lg:flex-row gap-6">
-          <div className="w-full lg:w-[360px] flex-shrink-0 space-y-4 self-start">
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+          <div className="hidden md:block w-full lg:w-[360px] flex-shrink-0">
             <About typing={false} />
           </div>
-          <div className="flex-1">
-            <div className="mb-4">
-              <h1 className="text-2xl font-bold mb-1">Projects</h1>
-              <p className="text-sm text-[var(--muted)]">A collection of things I've built and worked on.</p>
+          <div className="flex-1 flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-3xl md:text-2xl font-bold md:mb-1">Projects</h1>
+              <p className="hidden md:block text-sm text-[var(--muted)]">A collection of things I've built and worked on.</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 content-start" style={{ gridAutoRows: 'minmax(320px, auto)', minHeight: '680px' }}>
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 md:grid-rows-2 gap-4 md:gap-5 flex-1 transition-opacity duration-150 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
+            >
               {currentProjects.map((project) => (
                 <ProjectCard key={project.title} project={project} />
               ))}
-            </div>
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <button
-                onClick={() => setPage(p => Math.max(0, p - 1))}
-                disabled={page === 0}
-                className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <ChevronLeft />
-              </button>
-              <span className="text-sm text-[var(--muted)]">{page + 1} / {totalPages}</span>
-              <button
-                onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-                disabled={page === totalPages - 1}
-                className="p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--pink)] hover:border-[var(--pink-border)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <ChevronRight />
-              </button>
             </div>
           </div>
         </div>

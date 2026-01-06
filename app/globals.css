@@ -49,7 +49,7 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 20px;
+  padding: 16px;
   transition: all 0.2s ease;
   height: 100%;
 }
@@ -74,12 +74,18 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+  .label {
+    font-size: 10px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -183,8 +189,12 @@ body {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
 }
 
 @keyframes float-bounce {
@@ -196,4 +206,18 @@ body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes interest-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  60% {
+    transform: scale(1.15) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }

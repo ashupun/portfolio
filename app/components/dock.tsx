@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Sun, Moon } from './icon';
+import { Sun, Moon, ChevronLeft, ChevronRight } from './icons';
+
+interface PaginationProps {
+  page: number;
+  totalPages: number;
+  onPrev: () => void;
+  onNext: () => void;
+  isTransitioning: boolean;
+}
 
 function HomeIcon() {
   return (
@@ -28,8 +36,10 @@ function ProjectsIcon() {
   );
 }
 
-export function Dock({ variant = 'horizontal' }: { variant?: 'horizontal' | 'vertical' }) {
+export function Dock({ variant = 'horizontal', pagination }: { variant?: 'horizontal' | 'vertical'; pagination?: PaginationProps }) {
   const [dark, setDark] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,6 +49,21 @@ export function Dock({ variant = 'horizontal' }: { variant?: 'horizontal' | 'ver
     setDark(shouldBeDark);
     document.documentElement.classList.toggle('dark', shouldBeDark);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setVisible(currentScrollY < lastScrollY || currentScrollY < 50);
+      } else {
+        setVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const toggle = () => {
     const next = !dark;
@@ -79,7 +104,7 @@ export function Dock({ variant = 'horizontal' }: { variant?: 'horizontal' | 'ver
   }
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'}`}>
       <div className="flex items-center gap-2 p-2 rounded-2xl bg-[var(--card)]/80 backdrop-blur-xl border border-[var(--border)] shadow-lg">
         {items.map((item) => (
           <a
@@ -90,6 +115,26 @@ export function Dock({ variant = 'horizontal' }: { variant?: 'horizontal' | 'ver
             {item.icon}
           </a>
         ))}
+        {pagination && (
+          <>
+            <div className="w-px h-8 bg-[var(--border)] mx-1" />
+            <button
+              onClick={pagination.onPrev}
+              disabled={pagination.page === 0 || pagination.isTransitioning}
+              className="dock-icon p-3 rounded-xl transition-colors duration-200 hover:bg-[var(--pink)]/20 text-[var(--muted)] hover:text-[var(--pink)] disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft />
+            </button>
+            <span className="text-sm text-[var(--muted)] px-1 min-w-[40px] text-center">{pagination.page + 1}/{pagination.totalPages}</span>
+            <button
+              onClick={pagination.onNext}
+              disabled={pagination.page === pagination.totalPages - 1 || pagination.isTransitioning}
+              className="dock-icon p-3 rounded-xl transition-colors duration-200 hover:bg-[var(--pink)]/20 text-[var(--muted)] hover:text-[var(--pink)] disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <ChevronRight />
+            </button>
+          </>
+        )}
         <div className="w-px h-8 bg-[var(--border)] mx-1" />
         <button
           onClick={toggle}
