@@ -25,7 +25,7 @@ function BlogCard({ blog }: { blog: typeof sortedBlogs[0] }) {
         <h3 className="text-lg md:text-base font-semibold line-clamp-1">{blog.title}</h3>
         <span className="text-sm md:text-xs text-[var(--muted)] flex-shrink-0 ml-2">{formatDate(blog.date)}</span>
       </div>
-      <p className="text-base md:text-sm text-[var(--muted)] mb-3 flex-1 line-clamp-1">{getExcerpt(blog.content)}</p>
+      <p className="text-base md:text-sm text-[var(--muted)] mb-3 flex-1 line-clamp-2">{getExcerpt(blog.content)}</p>
       <span className="text-[var(--pink)] text-sm md:text-xs font-medium group-hover:underline flex items-center gap-1 self-start">
         Read more <Arrow />
       </span>
