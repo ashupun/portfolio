@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { User, Mail, Cloud, Music, Pen, Monitor, GitHub, Twitter, LinkedIn, Arrow, Laptop, Computer, Smartphone, Figma, Code, V0, Sparkles, Signal, Heart, Clock, Star } from './icons';
 import { blogs as blogData, getExcerpt } from '../data/blogs';
 
@@ -68,11 +69,16 @@ export function About({ typing = true }: { typing?: boolean }) {
           </a>
         </div>
       </div>
-      <img
-        src="/profilepicture.jpg"
-        alt="Ashu"
-        className="w-full aspect-square rounded-xl object-cover mb-6 max-md:w-32 max-md:h-32 max-md:mx-auto max-md:mb-4"
-      />
+      <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-6 max-md:w-32 max-md:h-32 max-md:mx-auto max-md:mb-4">
+        <Image
+          src="/profilepicture.jpg"
+          alt="Ashu Pun"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 128px, 360px"
+          priority
+        />
+      </div>
       <h1 className="text-xl md:text-lg font-semibold mb-2">
         {renderText()}
         <span className="inline-block w-[2px] h-[1.1em] bg-[var(--fg)] ml-0.5 align-middle cursor-blink" />

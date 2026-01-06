@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Dock } from '../components/dock';
 import { About } from '../components/widget';
 import { GitHub, Globe } from '../components/icons';
@@ -41,8 +42,8 @@ const projects = [
 function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <div className="card flex flex-col group">
-      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0">
-        <img src={project.cover} alt={project.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0 relative">
+        <Image src={project.cover} alt={project.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" />
       </div>
       <div className="flex items-start justify-between mb-2">
         <h3 className="text-lg md:text-base font-semibold line-clamp-1">{project.title}</h3>

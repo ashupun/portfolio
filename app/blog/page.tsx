@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Dock } from '../components/dock';
 import { About } from '../components/widget';
 import { Arrow } from '../components/icons';
@@ -17,8 +18,8 @@ function formatDate(dateString: string) {
 function BlogCard({ blog }: { blog: typeof sortedBlogs[0] }) {
   return (
     <Link href={`/blog/${blog.id}`} className="card flex flex-col group">
-      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0">
-        <img src={blog.image} alt={blog.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+      <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0 relative">
+        <Image src={blog.image} alt={blog.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" />
       </div>
       <div className="flex items-start justify-between mb-2">
         <h3 className="text-lg md:text-base font-semibold line-clamp-1">{blog.title}</h3>
