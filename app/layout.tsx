@@ -32,11 +32,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <meta name="view-transition" content="same-origin" />
       </head>
       <body
         className={`${dmSans.variable} antialiased`}
       >
-        {children}
+        <div className="page-transition">
+          {children}
+        </div>
       </body>
     </html>
   );

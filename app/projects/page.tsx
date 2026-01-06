@@ -36,40 +36,25 @@ const projects = [
     github: 'https://github.com/ashupun/chat-app',
     cover: '/projects/chat.png',
   },
-  {
-    title: 'E-commerce Store',
-    description: 'Modern shop with cart, checkout, and Stripe payments.',
-    tech: ['Next.js', 'Stripe', 'Sanity'],
-    github: 'https://github.com/ashupun/ecommerce',
-    live: 'https://shop.ashu.dev',
-    cover: '/projects/ecommerce.png',
-  },
-  {
-    title: 'Blog Platform',
-    description: 'Markdown blog with syntax highlighting and dark mode.',
-    tech: ['Next.js', 'MDX', 'Tailwind CSS'],
-    github: 'https://github.com/ashupun/blog',
-    cover: '/projects/blog.png',
-  },
 ];
 
 function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
-    <div className="card flex flex-col">
+    <div className="card flex flex-col group">
       <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0">
-        <img src={project.cover} alt={project.title} className="w-full h-full object-cover" />
+        <img src={project.cover} alt={project.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
       </div>
       <div className="flex items-start justify-between mb-2">
         <h3 className="text-lg md:text-base font-semibold line-clamp-1">{project.title}</h3>
         <div className="flex gap-2 flex-shrink-0">
           {project.github && (
             <a href={project.github} className="text-[var(--muted)] hover:text-[var(--pink)] transition-colors">
-              <GitHub />
+              <GitHub className="w-5 h-5" />
             </a>
           )}
           {project.live && (
             <a href={project.live} className="text-[var(--muted)] hover:text-[var(--pink)] transition-colors">
-              <Globe />
+              <Globe className="w-5 h-5" />
             </a>
           )}
         </div>

@@ -150,36 +150,32 @@ body {
 }
 
 ::view-transition-old(root) {
-  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) slide-out;
+  animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1) fade-scale-out forwards;
 }
 
 ::view-transition-new(root) {
-  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) slide-in;
+  animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1) fade-scale-in forwards;
 }
 
-@keyframes slide-out {
+@keyframes fade-scale-out {
   from {
     opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: blur(0);
+    transform: scale(1);
   }
   to {
     opacity: 0;
-    transform: translateX(-30px) scale(0.98);
-    filter: blur(4px);
+    transform: scale(0.98);
   }
 }
 
-@keyframes slide-in {
+@keyframes fade-scale-in {
   from {
     opacity: 0;
-    transform: translateX(30px) scale(0.98);
-    filter: blur(4px);
+    transform: scale(1.02);
   }
   to {
     opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: blur(0);
+    transform: scale(1);
   }
 }
 
