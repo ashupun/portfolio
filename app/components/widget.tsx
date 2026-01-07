@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { User, Mail, Cloud, Music, Pen, Monitor, GitHub, Twitter, LinkedIn, Arrow, Laptop, Computer, Smartphone, Figma, Code, V0, Sparkles, Signal, Heart, Clock, Star } from './icons';
+import { User, Mail, Cloud, Music, Pen, Monitor, GitHub, Twitter, LinkedIn, Arrow, Laptop, Computer, Smartphone, Figma, Code, V0, Sparkles, Signal, Heart, Clock, Star, Spotify } from './icons';
 import { blogs as blogData, getExcerpt } from '../data/blogs';
 
 export function About({ typing = true }: { typing?: boolean }) {
@@ -411,7 +411,7 @@ export function Playing() {
     };
 
     fetchSpotify();
-    const interval = setInterval(fetchSpotify, 30000);
+    const interval = setInterval(fetchSpotify, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -440,13 +440,9 @@ export function Playing() {
     }
   };
 
-  const progress = spotifyData?.progress && spotifyData?.duration
-    ? (spotifyData.progress / spotifyData.duration) * 100
-    : 0;
-
   return (
     <div className="card h-full flex flex-col">
-      <div className="label"><Music /> Favourite Songs</div>
+      <div className="label"><Spotify /> Listening to Spotify</div>
       <div className="flex-1 flex flex-col items-center justify-center gap-3 md:gap-4">
         <div
           className="w-20 h-20 md:w-28 md:h-28 cursor-pointer"
@@ -480,13 +476,6 @@ export function Playing() {
           <p className="text-base md:text-sm font-semibold truncate max-w-[160px]">{spotifyData?.title || 'Not Playing'}</p>
           <p className="text-base md:text-sm text-[var(--muted)] truncate max-w-[160px]">{spotifyData?.artist || 'Spotify'}</p>
         </div>
-        {spotifyData?.isPlaying && (
-          <div className="w-full max-w-[140px]">
-            <div className="h-1.5 bg-[var(--border)] rounded-full overflow-hidden relative">
-              <div className="h-full bg-[var(--pink)] rounded-full transition-all duration-1000" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
