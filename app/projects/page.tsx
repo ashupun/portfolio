@@ -48,7 +48,7 @@ const projects = [
     tech: ["Next.js", "Tailwind CSS"],
     github: "https://github.com/ashupun/crybaby",
     live: "https://cryba.by",
-    cover: "/crybaby.png",
+    cover: "/cryba.by.png",
   },
   {
     title: "loving.gg",
@@ -108,6 +108,8 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
                   ? "/favicon.ico"
                   : project.live === "https://sweethe.art"
                   ? "/sweethearticon.png"
+                  : project.live === "https://cryba.by"
+                  ? "/crybabyicon.png"
                   : `https://www.google.com/s2/favicons?domain=${
                       new URL(project.live).hostname
                     }&sz=32`
