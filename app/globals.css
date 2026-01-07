@@ -38,7 +38,8 @@ body {
   background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
   background-size: 24px 24px;
   color: var(--fg);
-  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", -apple-system, BlinkMacSystemFont,
+    sans-serif;
 }
 
 * {
@@ -48,10 +49,17 @@ body {
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 12px;
   transition: all 0.2s ease;
   height: 100%;
+}
+
+@media (min-width: 768px) {
+  .card {
+    border-radius: 20px;
+    padding: 16px;
+  }
 }
 
 .card:hover {
@@ -61,13 +69,27 @@ body {
 }
 
 @keyframes wobble {
-  0% { transform: rotate(0deg); }
-  15% { transform: rotate(-1deg); }
-  30% { transform: rotate(1deg); }
-  45% { transform: rotate(-0.5deg); }
-  60% { transform: rotate(0.5deg); }
-  75% { transform: rotate(-0.25deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-1deg);
+  }
+  30% {
+    transform: rotate(1deg);
+  }
+  45% {
+    transform: rotate(-0.5deg);
+  }
+  60% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.25deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .label {
@@ -108,8 +130,13 @@ body {
 }
 
 @keyframes caret-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .cursor-blink {
@@ -117,11 +144,22 @@ body {
 }
 
 @keyframes dock-wiggle {
-  0%, 100% { transform: rotate(0deg) scale(1.1); }
-  20% { transform: rotate(-12deg) scale(1.1); }
-  40% { transform: rotate(12deg) scale(1.1); }
-  60% { transform: rotate(-8deg) scale(1.1); }
-  80% { transform: rotate(8deg) scale(1.1); }
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1.1);
+  }
+  20% {
+    transform: rotate(-12deg) scale(1.1);
+  }
+  40% {
+    transform: rotate(12deg) scale(1.1);
+  }
+  60% {
+    transform: rotate(-8deg) scale(1.1);
+  }
+  80% {
+    transform: rotate(8deg) scale(1.1);
+  }
 }
 
 .dock-icon:hover {
@@ -180,13 +218,23 @@ body {
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
@@ -194,14 +242,25 @@ body {
 }
 
 @keyframes float-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes interest-pop {
@@ -215,5 +274,48 @@ body {
   100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
+  }
+}
+
+.about-hero {
+  display: block;
+}
+
+.about-hero .profile-image {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 16px;
+}
+
+.about-hero .intro-text {
+  display: block;
+}
+
+@media (min-width: 769px) and (max-width: 1303px) {
+  .about-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .about-hero .profile-image {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .about-hero .intro-text {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1304px) {
+  .about-hero {
+    display: block;
+  }
+  .about-hero .profile-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 0 24px;
   }
 }

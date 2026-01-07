@@ -69,23 +69,27 @@ export function About({ typing = true }: { typing?: boolean }) {
           </a>
         </div>
       </div>
-      <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-6 max-md:w-32 max-md:h-32 max-md:mx-auto max-md:mb-4">
-        <Image
-          src="/profilepicture.jpg"
-          alt="Ashu Pun"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 128px, 360px"
-          priority
-        />
+      <div className="about-hero mb-6">
+        <div className="profile-image relative rounded-xl overflow-hidden">
+          <Image
+            src="/profilepicture.jpg"
+            alt="Ashu Pun"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 128px, (max-width: 1024px) 100px, 360px"
+            priority
+          />
+        </div>
+        <div className="intro-text">
+          <h1 className="text-lg font-semibold mb-2">
+            {renderText()}
+            <span className="inline-block w-[2px] h-[1.1em] bg-[var(--fg)] ml-0.5 align-middle cursor-blink" />
+          </h1>
+          <p className="text-base md:text-sm text-[var(--muted)]">
+            A designer and engineer based in London.
+          </p>
+        </div>
       </div>
-      <h1 className="text-xl md:text-lg font-semibold mb-2">
-        {renderText()}
-        <span className="inline-block w-[2px] h-[1.1em] bg-[var(--fg)] ml-0.5 align-middle cursor-blink" />
-      </h1>
-      <p className="text-base md:text-sm text-[var(--muted)] mb-8">
-        A designer and engineer based in London.
-      </p>
       <div className="border-t border-[var(--border)] pt-6 mb-8">
         <div className="label">
           <Star /> Fun Facts
@@ -251,7 +255,7 @@ export function Projects() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="label !mb-2">
+      <div className="label !mb-1 md:!mb-2">
         <Code /> Projects
         <span className="ml-auto transition-transform duration-300 group-hover:translate-x-1"><Arrow /></span>
       </div>
@@ -265,7 +269,7 @@ export function Projects() {
         {floatingIcons.map((item, i) => (
           <span
             key={i}
-            className="absolute text-sm transition-all duration-500"
+            className="absolute text-[10px] md:text-sm transition-all duration-500"
             style={{
               left: `${item.x}%`,
               top: `${item.y}%`,
@@ -279,7 +283,7 @@ export function Projects() {
           </span>
         ))}
         <div className="text-center relative z-10">
-          <p className="text-xs font-medium transition-all duration-300 group-hover:scale-105">View All</p>
+          <p className="text-[10px] md:text-xs font-medium transition-all duration-300 group-hover:scale-105">View All</p>
         </div>
       </div>
     </a>
@@ -288,24 +292,24 @@ export function Projects() {
 
 export function Skills() {
   return (
-    <div className="card h-full flex flex-col">
+    <div className="card h-full flex flex-col overflow-hidden">
       <div className="label"><Sparkles /> Skills</div>
-      <div className="flex-1 flex flex-col justify-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[var(--pink)]/20 flex items-center justify-center text-[var(--pink)] font-bold text-sm">UI</div>
-          <p className="text-base md:text-sm font-medium">UI/UX Design</p>
+      <div className="flex-1 flex flex-col justify-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[var(--pink)]/20 flex items-center justify-center text-[var(--pink)] font-bold text-xs md:text-sm flex-shrink-0">UI</div>
+          <p className="text-xs md:text-sm font-medium truncate">UI/UX</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#e34c26]/20 flex items-center justify-center text-[#e34c26] font-bold text-xs">{`</>`}</div>
-          <p className="text-base md:text-sm font-medium">HTML & CSS Basics</p>
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#e34c26]/20 flex items-center justify-center text-[#e34c26] font-bold text-[10px] md:text-xs flex-shrink-0">{`</>`}</div>
+          <p className="text-xs md:text-sm font-medium truncate">HTML/CSS</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#10b981]/20 flex items-center justify-center text-[#10b981] font-bold text-sm">Co</div>
-          <p className="text-base md:text-sm font-medium">Collaboration & Communication</p>
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#10b981]/20 flex items-center justify-center text-[#10b981] font-bold text-xs md:text-sm flex-shrink-0">Co</div>
+          <p className="text-xs md:text-sm font-medium truncate">Collab</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#000]/10 flex items-center justify-center font-bold text-sm">N</div>
-          <p className="text-base md:text-sm font-medium">Notion for Documentation</p>
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#000]/10 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">N</div>
+          <p className="text-xs md:text-sm font-medium truncate">Notion</p>
         </div>
       </div>
     </div>
@@ -336,30 +340,30 @@ export function Blog() {
     <div className="card h-full flex flex-col overflow-hidden">
       <div className="label">
         <Pen /> Blog
-        <a href="/blog" className="ml-auto text-[var(--muted)] text-xs cursor-pointer hover:text-[var(--pink)]">Read More →</a>
+        <a href="/blog" className="ml-auto text-[var(--muted)] text-[10px] md:text-xs cursor-pointer hover:text-[var(--pink)]">Read More →</a>
       </div>
       <div className="flex-1 relative">
         {recentBlogs.map((blog, i) => (
           <a
             key={blog.id}
             href={`/blog/${blog.id}`}
-            className="absolute p-5 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer w-[280px]"
+            className="absolute p-3 md:p-5 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer w-[200px] md:w-[280px]"
             style={{
               backgroundColor: postItColors[i],
               transform: `rotate(${i === 0 ? -3 : 2}deg)`,
-              left: i === 0 ? '2%' : '40%',
+              left: i === 0 ? '2%' : '35%',
               top: i === 0 ? '5%' : '12%',
               zIndex: i,
             }}
           >
-            <div className="absolute -top-2.5 left-6 w-5 h-5 rounded-full bg-slate-400 border-2 border-slate-500 shadow-sm" />
-            <div className="flex items-center gap-2 mb-3">
+            <div className="absolute -top-2 md:-top-2.5 left-4 md:left-6 w-4 h-4 md:w-5 md:h-5 rounded-full bg-slate-400 border-2 border-slate-500 shadow-sm" />
+            <div className="flex items-center gap-1.5 md:gap-2 mb-2 md:mb-3">
               <Pen />
-              <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">Blog</span>
+              <span className="text-[10px] md:text-xs font-semibold uppercase tracking-wide text-slate-500">Blog</span>
             </div>
-            <h3 className="font-bold text-lg text-slate-800 leading-tight mb-1">{blog.title}</h3>
-            <p className="text-xs text-slate-500 mb-3">{getTimeAgo(blog.date)}</p>
-            <p className="text-sm text-slate-600 leading-relaxed line-clamp-5">{getExcerpt(blog.content)}</p>
+            <h3 className="font-bold text-sm md:text-lg text-slate-800 leading-tight mb-1">{blog.title}</h3>
+            <p className="text-[10px] md:text-xs text-slate-500 mb-2 md:mb-3">{getTimeAgo(blog.date)}</p>
+            <p className="text-xs md:text-sm text-slate-600 leading-relaxed line-clamp-3 md:line-clamp-5">{getExcerpt(blog.content)}</p>
           </a>
         ))}
       </div>
@@ -443,9 +447,9 @@ export function Playing() {
   return (
     <div className="card h-full flex flex-col">
       <div className="label"><Music /> Favourite Songs</div>
-      <div className="flex-1 flex flex-col items-center justify-center gap-4">
+      <div className="flex-1 flex flex-col items-center justify-center gap-3 md:gap-4">
         <div
-          className="w-28 h-28 cursor-pointer"
+          className="w-20 h-20 md:w-28 md:h-28 cursor-pointer"
           style={{ perspective: '1000px' }}
           onClick={handleAlbumClick}
           onMouseEnter={() => setIsHovering(true)}
@@ -522,14 +526,14 @@ export function GitHubGraph() {
   return (
     <div className="card h-full flex flex-col">
       <div className="label"><a href="https://github.com/ashupun" className="hover:text-[var(--pink)] transition-colors"><GitHub /></a> Contributions</div>
-      <div className="flex-1 flex items-center">
-        <div className="flex gap-[3px] overflow-hidden">
+      <div className="flex-1 flex items-center justify-center">
+        <div className="flex gap-[2px] md:gap-[3px] overflow-hidden">
           {weeks.map((week, i) => (
-            <div key={i} className="flex flex-col gap-[3px]">
+            <div key={i} className="flex flex-col gap-[2px] md:gap-[3px]">
               {week.map((count, j) => (
                 <div
                   key={j}
-                  className={`w-[10px] h-[10px] rounded-sm ${getColor(count)}`}
+                  className={`w-[8px] h-[8px] md:w-[10px] md:h-[10px] rounded-sm ${getColor(count)}`}
                 />
               ))}
             </div>
@@ -578,10 +582,8 @@ export function Interests() {
   const interests = [
     { name: 'Gaming', color: '#8b5cf6' },
     { name: 'Baking', color: '#f472b6' },
-    { name: 'Photography', color: '#06b6d4' },
     { name: 'Anime', color: '#ef4444' },
     { name: 'Travel', color: '#22c55e' },
-    { name: 'Coffee', color: '#f59e0b' },
     { name: 'Digital Art', color: '#ec4899' },
   ];
 
@@ -611,12 +613,12 @@ export function Interests() {
 
   return (
     <div className="card h-full overflow-hidden flex flex-col" ref={containerRef}>
-      <div className="label !mb-2"><Heart /> Hobbies</div>
-      <div className="flex-1 flex flex-wrap gap-1.5 content-start overflow-hidden">
+      <div className="label !mb-1 md:!mb-2"><Heart /> Hobbies</div>
+      <div className="flex-1 flex flex-wrap gap-1 md:gap-1.5 content-start overflow-hidden">
         {interests.map((interest, index) => (
           <span
             key={interest.name}
-            className="px-2 py-1 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)] text-xs transition-all duration-500 cursor-default hover:scale-105"
+            className="px-1.5 md:px-2 py-0.5 md:py-1 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)] text-[10px] md:text-xs transition-all duration-500 cursor-default hover:scale-105"
             style={{
               ['--hover-color' as string]: interest.color,
               ...(isMobile && isVisible ? {
@@ -654,23 +656,33 @@ export function Interests() {
 export function Tools() {
   return (
     <div className="card h-full overflow-hidden flex flex-col">
-      <div className="label !mb-2"><Monitor /> What I Use</div>
-      <div className="flex-1 grid grid-cols-2 gap-3 text-xs overflow-hidden">
-        <div>
-          <p className="text-[var(--muted)] text-[10px] mb-1 font-medium">Hardware</p>
-          <ul className="space-y-1">
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><Laptop /> <span className="text-[var(--fg)]">MacBook Pro M4</span></li>
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><Computer /> <span className="text-[var(--fg)]">Gaming PC</span></li>
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><Smartphone /> <span className="text-[var(--fg)]">iPhone 15 Pro</span></li>
-          </ul>
-        </div>
-        <div>
-          <p className="text-[var(--muted)] text-[10px] mb-1 font-medium">Software</p>
-          <ul className="space-y-1">
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><V0 /> <span className="text-[var(--fg)]">v0</span></li>
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><Code /> <span className="text-[var(--fg)]">VSCode</span></li>
-            <li className="flex items-center gap-1.5 text-[var(--muted)]"><Figma /> <span className="text-[var(--fg)]">Figma</span></li>
-          </ul>
+      <div className="label !mb-1"><Monitor /> What I Use</div>
+      <div className="flex-1 flex items-center">
+        <div className="grid grid-cols-3 gap-2 w-full">
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <Laptop />
+            <span className="text-[9px] text-center">MacBook</span>
+          </div>
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <Computer />
+            <span className="text-[9px] text-center">PC</span>
+          </div>
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <Smartphone />
+            <span className="text-[9px] text-center">iPhone</span>
+          </div>
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <V0 />
+            <span className="text-[9px] text-center">v0</span>
+          </div>
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <Code />
+            <span className="text-[9px] text-center">VSCode</span>
+          </div>
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-lg bg-[var(--border)]/50">
+            <Figma />
+            <span className="text-[9px] text-center">Figma</span>
+          </div>
         </div>
       </div>
     </div>
@@ -683,13 +695,13 @@ export function TechStack() {
   return (
     <div className="card h-full">
       <div className="label"><Code /> Tech Stack</div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5 md:gap-2">
         {technologies.map((tech) => (
           <div
             key={tech}
-            className="px-3 py-1.5 rounded-lg bg-[var(--border)] hover:scale-105 transition-transform cursor-default"
+            className="px-2 md:px-3 py-1 md:py-1.5 rounded-lg bg-[var(--border)] hover:scale-105 transition-transform cursor-default"
           >
-            <span className="text-sm font-medium">{tech}</span>
+            <span className="text-xs md:text-sm font-medium">{tech}</span>
           </div>
         ))}
       </div>
@@ -703,13 +715,13 @@ export function Learning() {
   return (
     <div className="card h-full">
       <div className="label"><Sparkles /> Learning</div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5 md:gap-2">
         {learning.map((tech) => (
           <div
             key={tech}
-            className="px-3 py-1.5 rounded-lg bg-[var(--border)] hover:scale-105 transition-transform cursor-default"
+            className="px-2 md:px-3 py-1 md:py-1.5 rounded-lg bg-[var(--border)] hover:scale-105 transition-transform cursor-default"
           >
-            <span className="text-sm font-medium">{tech}</span>
+            <span className="text-xs md:text-sm font-medium">{tech}</span>
           </div>
         ))}
       </div>

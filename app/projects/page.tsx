@@ -17,15 +17,6 @@ const projects = [
     cover: "/portfolio.png",
   },
   {
-    title: "cryba.by",
-    description:
-      "A quiet digital space for emotional release and gentle support.",
-    tech: ["Next.js", "Tailwind CSS"],
-    github: "https://github.com/ashupun/crybaby",
-    live: "https://cryba.by",
-    cover: "/crybaby.png",
-  },
-  {
     title: "sweethe.art",
     description: "Link Aggregator: simple and elegant link in bio page.",
     tech: ["Next.js", "Tailwind CSS"],
@@ -36,11 +27,20 @@ const projects = [
   {
     title: "lovehe.art",
     description:
-      "A cryptocurrency that let's you convert stable coins with minimal transaction fees.",
+      "A cryptocurrency converter that let's you convert stable coins with minimal transaction fees.",
     tech: ["Next.js", "Tailwind CSS"],
     github: "https://github.com/ashupun/loveheart",
     live: "https://lovehe.art",
     cover: "/loveheart.png",
+  },
+  {
+    title: "cryba.by",
+    description:
+      "A quiet digital space for emotional release and gentle support.",
+    tech: ["Next.js", "Tailwind CSS"],
+    github: "https://github.com/ashupun/crybaby",
+    live: "https://cryba.by",
+    cover: "/crybaby.png",
   },
   {
     title: "loving.gg",
@@ -69,22 +69,41 @@ const projects = [
 ];
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="card flex flex-col group">
       <div className="aspect-[16/9] rounded-lg overflow-hidden mb-3 bg-[var(--border)] flex-shrink-0 relative">
-        <Image
-          src={project.cover}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        />
+        {imageError ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--pink)]/20 to-[var(--pink)]/5">
+            <span className="text-sm font-medium text-[var(--muted)]">
+              Coming Soon
+            </span>
+          </div>
+        ) : (
+          <Image
+            src={project.cover}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            onError={() => setImageError(true)}
+          />
+        )}
       </div>
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2 min-w-0">
           {project.live && (
             <img
-              src={project.live === "https://ashupun.com" ? "/favicon.ico" : project.live === "https://sweethe.art" ? "/sweethearticon.png" : `https://www.google.com/s2/favicons?domain=${new URL(project.live).hostname}&sz=32`}
+              src={
+                project.live === "https://ashupun.com"
+                  ? "/favicon.ico"
+                  : project.live === "https://sweethe.art"
+                  ? "/sweethearticon.png"
+                  : `https://www.google.com/s2/favicons?domain=${
+                      new URL(project.live).hostname
+                    }&sz=32`
+              }
               alt=""
               className="w-4 h-4 flex-shrink-0"
             />
@@ -131,17 +150,18 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
 
 export default function Projects() {
   const [page, setPage] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const checkSize = () => {
+      const width = window.innerWidth;
+      setItemsPerPage(width < 1024 ? 2 : 6);
+    };
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
   }, []);
-
-  const itemsPerPage = isMobile ? 2 : 6;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   const currentProjects = projects.slice(
     page * itemsPerPage,

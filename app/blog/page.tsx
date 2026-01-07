@@ -35,17 +35,18 @@ function BlogCard({ blog }: { blog: typeof sortedBlogs[0] }) {
 
 export default function Blog() {
   const [page, setPage] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const checkSize = () => {
+      const width = window.innerWidth;
+      setItemsPerPage(width < 1024 ? 2 : 6);
+    };
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
   }, []);
-
-  const itemsPerPage = isMobile ? 2 : 6;
   const totalPages = Math.ceil(sortedBlogs.length / itemsPerPage);
   const currentBlogs = sortedBlogs.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
 
