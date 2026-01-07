@@ -13,7 +13,7 @@ const baseUrl = "https://ashupun.com";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Ashu Pun | Designer & Engineer",
+    default: "Ashu Pun",
     template: "%s | Ashu Pun",
   },
   description: "Designer and engineer based in London. Creating beautiful, functional digital experiences with a passion for clean design and modern web technologies.",
