@@ -490,15 +490,15 @@ export function GitHubGraph() {
         const response = await fetch('https://github-contributions-api.jogruber.de/v4/ashupun?y=last');
         const data = await response.json();
         const contributions = data.contributions || [];
-        const last112Days = contributions.slice(-112);
+        const last70Days = contributions.slice(-70);
         const formatted: number[][] = [];
-        for (let i = 0; i < last112Days.length; i += 7) {
-          const week = last112Days.slice(i, i + 7).map((day: { count: number }) => day.count);
+        for (let i = 0; i < last70Days.length; i += 7) {
+          const week = last70Days.slice(i, i + 7).map((day: { count: number }) => day.count);
           formatted.push(week);
         }
         setWeeks(formatted);
       } catch {
-        setWeeks(Array.from({ length: 16 }, () => Array.from({ length: 7 }, () => 0)));
+        setWeeks(Array.from({ length: 10 }, () => Array.from({ length: 7 }, () => 0)));
       }
     };
     fetchContributions();
