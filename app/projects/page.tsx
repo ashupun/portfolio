@@ -19,7 +19,7 @@ const projects = [
   {
     title: "sweethe.art",
     description: "Link Aggregator: simple and elegant link in bio page.",
-    tech: ["Next.js", "Tailwind CSS"],
+    tech: ["Next.js", "CSS"],
     github: "https://github.com/ashupun/sweetheart",
     live: "https://sweethe.art",
     cover: "/sweetheart.png",
@@ -32,6 +32,14 @@ const projects = [
     github: "https://github.com/ashupun/loveheart",
     live: "https://lovehe.art",
     cover: "/loveheart.png",
+  },
+  {
+    title: "sugarblooms.co.uk",
+    description: "Website for a bespoke cake business based in the UK.",
+    tech: ["Next.js", "Tailwind CSS"],
+    github: "https://github.com/ashupun/sugarblooms",
+    live: "https://sugarblooms.co.uk",
+    cover: "/sugarblooms.png",
   },
   {
     title: "cryba.by",
