@@ -618,15 +618,15 @@ export function GitHubGraph() {
         const response = await fetch('https://github-contributions-api.jogruber.de/v4/ashupun?y=last');
         const data = await response.json();
         const contributions = data.contributions || [];
-        const last70Days = contributions.slice(-70);
+        const last49Days = contributions.slice(-49);
         const formatted: number[][] = [];
-        for (let i = 0; i < last70Days.length; i += 7) {
-          const week = last70Days.slice(i, i + 7).map((day: { count: number }) => day.count);
+        for (let i = 0; i < last49Days.length; i += 7) {
+          const week = last49Days.slice(i, i + 7).map((day: { count: number }) => day.count);
           formatted.push(week);
         }
         setWeeks(formatted);
       } catch {
-        setWeeks(Array.from({ length: 10 }, () => Array.from({ length: 7 }, () => 0)));
+        setWeeks(Array.from({ length: 7 }, () => Array.from({ length: 7 }, () => 0)));
       }
     };
     fetchContributions();
@@ -644,7 +644,7 @@ export function GitHubGraph() {
     <div ref={tilt.ref} style={tilt.style} className="card h-full flex flex-col">
       <div className="label"><a href="https://github.com/ashupun" className="hover:text-[var(--pink)] transition-colors hover:scale-110 inline-block"><GitHub /></a> Contributions</div>
       <div className="flex-1 flex items-center justify-center p-2">
-        <div className="flex gap-[3px] md:gap-1 overflow-hidden">
+        <div className="flex gap-[3px] md:gap-1">
           {weeks.map((week, i) => (
             <div key={i} className="flex flex-col gap-[3px] md:gap-1">
               {week.map((count, j) => {
@@ -720,7 +720,7 @@ export function Interests() {
         {interests.map((interest, index) => (
           <span
             key={interest.name}
-            className="px-1.5 md:px-2 py-0.5 md:py-1 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)] text-xs md:text-sm transition-all duration-300 cursor-default hover:scale-110 group"
+            className="px-1.5 md:px-2 py-0.5 md:py-1 rounded-full bg-[var(--pink-light)] text-[var(--pink)] border border-[var(--pink-border)] text-xs md:text-sm transition-all duration-300 cursor-default group"
             style={{
               ['--hover-color' as string]: interest.color,
               ...(isMobile && isVisible ? {
@@ -737,7 +737,6 @@ export function Interests() {
               el.style.borderColor = interest.color;
               el.style.color = interest.color;
               el.style.boxShadow = `0 0 16px ${interest.color}60`;
-              el.style.transform = 'scale(1.1) translateY(-2px)';
             }}
             onMouseLeave={(e) => {
               if (isMobile && isVisible) return;
@@ -746,7 +745,6 @@ export function Interests() {
               el.style.borderColor = '';
               el.style.color = '';
               el.style.boxShadow = '';
-              el.style.transform = '';
             }}
           >
             {interest.name}
