@@ -80,7 +80,7 @@ export function About({ typing = true }: { typing?: boolean }) {
   };
 
   return (
-    <div ref={tilt.ref} style={tilt.style} className="card overflow-hidden gradient-bg">
+    <div ref={tilt.ref} style={tilt.style} className="card h-full overflow-hidden gradient-bg flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="label !mb-0">
           <User /> About Me
@@ -127,7 +127,7 @@ export function About({ typing = true }: { typing?: boolean }) {
           </p>
         </div>
       </div>
-      <div className="border-t border-[var(--border)] pt-6 mb-8">
+      <div className="border-t border-[var(--border)] pt-6">
         <div className="label">
           <Star /> Fun Facts
         </div>
@@ -137,7 +137,7 @@ export function About({ typing = true }: { typing?: boolean }) {
           <li className="hover:translate-x-1 transition-transform">• Aspiring coder</li>
         </ul>
       </div>
-      <div className="border-t border-[var(--border)] pt-6">
+      <div className="border-t border-[var(--border)] pt-6 mt-auto">
         <div className="label">
           <Mail /> Contact
         </div>
@@ -313,12 +313,12 @@ export function Location() {
           alt="London, UK"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute bottom-3 right-3 bg-white px-3 py-1.5 rounded-full text-xs md:text-sm font-medium shadow-lg flex items-center gap-1.5 text-[#333]">
+        <a href="https://www.google.com/maps?ll=51.5074,-0.1278&z=13&t=m&hl=en&gl=GB&mapclient=embed" target="_blank" rel="noopener noreferrer" className="absolute bottom-3 right-3 bg-white px-3 py-1.5 rounded-full text-xs md:text-sm font-medium shadow-lg flex items-center gap-1.5 text-[#333] hover:scale-105 transition-transform">
           <svg className="w-4 h-4 text-[var(--pink)]" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
           </svg>
           London, UK
-        </div>
+        </a>
       </div>
     </div>
   );
@@ -682,11 +682,11 @@ export function Interests() {
   const tilt = useTilt(12);
 
   const interests = [
-    { name: 'Gaming', color: '#8b5cf6', emoji: '🎮' },
-    { name: 'Baking', color: '#f472b6', emoji: '🧁' },
-    { name: 'Anime', color: '#ef4444', emoji: '🎌' },
-    { name: 'Travel', color: '#22c55e', emoji: '✈️' },
-    { name: 'Digital Art', color: '#ec4899', emoji: '🎨' },
+    { name: 'Gaming', color: '#8b5cf6' },
+    { name: 'Baking', color: '#f472b6' },
+    { name: 'Anime', color: '#ef4444' },
+    { name: 'Travel', color: '#22c55e' },
+    { name: 'Digital Art', color: '#ec4899' },
   ];
 
   useEffect(() => {
@@ -749,7 +749,6 @@ export function Interests() {
               el.style.transform = '';
             }}
           >
-            <span className="mr-1">{interest.emoji}</span>
             {interest.name}
           </span>
         ))}
@@ -761,14 +760,16 @@ export function Interests() {
 export function Tools() {
   const tilt = useTilt(10);
   const hardware = [
-    { icon: <Laptop />, name: 'MacBook Pro M3 Max' },
-    { icon: <Smartphone />, name: 'iPhone 15 Pro Max' },
-    { icon: <Computer />, name: 'Second Gaming PC' },
+    { icon: <Laptop />, name: 'MacBook Pro M4' },
+    { icon: <Computer />, name: 'Gaming PC' },
+    { icon: <Smartphone />, name: 'iPhone 15 Pro' },
+    
+
   ];
   const software = [
     { icon: <Figma />, name: 'Figma' },
     { icon: <Code />, name: 'VSCode' },
-    { icon: <V0 />, name: 'Adobe Suite' },
+    { icon: <V0 />, name: 'v0' },
   ];
 
   return (
@@ -808,13 +809,12 @@ export function TechStack() {
     { name: 'Next.js', color: '#000000' },
     { name: 'React', color: '#61dafb' },
     { name: 'Tailwind', color: '#38bdf8' },
-    { name: 'Node.js', color: '#68a063' },
     { name: 'Python', color: '#3776ab' },
   ];
 
   return (
-    <div ref={tilt.ref} style={tilt.style} className="card h-full">
-      <div className="label"><Code /> Tech Stack</div>
+    <div ref={tilt.ref} style={tilt.style} className="card">
+      <div className="label !mb-2"><Code /> Tech Stack</div>
       <div className="flex flex-wrap gap-1.5 md:gap-2">
         {technologies.map((tech) => (
           <div
@@ -843,13 +843,14 @@ export function Learning() {
   const tilt = useTilt(12);
   const learning = [
     { name: 'TypeScript', color: '#3178c6' },
+    { name: 'Node.js', color: '#68a063' },
     { name: 'Git', color: '#f05032' },
     { name: 'AWS', color: '#ff9900' },
   ];
 
   return (
-    <div ref={tilt.ref} style={tilt.style} className="card h-full">
-      <div className="label"><Sparkles /> Learning</div>
+    <div ref={tilt.ref} style={tilt.style} className="card">
+      <div className="label !mb-2"><Sparkles /> Learning</div>
       <div className="flex flex-wrap gap-1.5 md:gap-2">
         {learning.map((tech) => (
           <div
