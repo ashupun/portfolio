@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     default: "Ashu Pun",
     template: "%s | Ashu Pun",
   },
-  description: "Designer and engineer based in London. Creating beautiful, functional digital experiences with a passion for clean design and modern web technologies.",
-  keywords: ["Ashu Pun", "designer", "engineer", "web developer", "London", "portfolio", "UI/UX", "Next.js", "React"],
+  description: "Ashu Pun - Designer and engineer based in London. Creating beautiful, functional digital experiences with a passion for clean design and modern web technologies.",
+  keywords: ["Ashu", "Ashu Pun", "ashupun", "Ashu developer", "Ashu designer", "Ashu London", "Ashu portfolio", "Ashu Pun portfolio", "designer", "engineer", "web developer", "frontend developer", "London", "portfolio", "UI/UX", "Next.js", "React"],
   authors: [{ name: "Ashu Pun", url: baseUrl }],
   creator: "Ashu Pun",
   openGraph: {
@@ -75,9 +75,12 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Ashu Pun",
+  alternateName: ["Ashu", "ashupun", "Ashubun"],
   url: baseUrl,
   image: `${baseUrl}/profilepicture.jpg`,
   jobTitle: "Designer & Engineer",
+  description: "Ashu Pun is a designer and engineer based in London, creating beautiful digital experiences.",
+  knowsAbout: ["Web Development", "UI/UX Design", "React", "Next.js", "TypeScript"],
   worksFor: {
     "@type": "Organization",
     name: "Freelance",
@@ -94,6 +97,19 @@ const personJsonLd = {
   ],
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Ashu Pun",
+  alternateName: ["Ashu", "Ashu Pun Portfolio"],
+  url: baseUrl,
+  description: "Portfolio of Ashu Pun - Designer and Engineer based in London",
+  author: {
+    "@type": "Person",
+    name: "Ashu Pun",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -107,6 +123,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body
