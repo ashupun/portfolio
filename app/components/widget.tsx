@@ -349,7 +349,7 @@ export function Projects() {
 
   return (
     <a
-      ref={tilt.ref as React.RefObject<HTMLAnchorElement>}
+      ref={tilt.ref as unknown as React.RefObject<HTMLAnchorElement>}
       style={tilt.style}
       href="/projects"
       className="card h-full flex flex-col cursor-pointer group overflow-hidden"
