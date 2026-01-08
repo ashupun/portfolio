@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import { DockProvider } from "./components/provider";
+import { Dock } from "./components/dock";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -108,11 +110,17 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${dmSans.variable} antialiased`}
+        className={`${dmSans.variable} antialiased overflow-x-hidden`}
       >
-        <div className="page-transition">
-          {children}
-        </div>
+        <div className="floating-blob blob-1" aria-hidden="true" />
+        <div className="floating-blob blob-2" aria-hidden="true" />
+        <div className="floating-blob blob-3" aria-hidden="true" />
+        <DockProvider>
+          <div className="page-transition relative z-10">
+            {children}
+          </div>
+          <Dock />
+        </DockProvider>
       </body>
     </html>
   );

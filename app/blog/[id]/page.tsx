@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Dock } from '../../components/dock';
 import { ChevronLeft } from '../../components/icons';
 import { blogs, getExcerpt } from '../../data/blogs';
 
@@ -104,9 +103,8 @@ export default async function BlogPost({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <div className="min-h-screen pb-24">
-        <Dock />
-        <main className="max-w-3xl mx-auto px-4 md:px-8 pt-8">
+      <div className="min-h-screen pb-28">
+        <main className="max-w-3xl mx-auto px-4 md:px-8 pt-8 lg:pt-6">
           <Link href="/blog" className="inline-flex items-center gap-2 text-[var(--muted)] hover:text-[var(--pink)] transition-colors mb-6">
             <ChevronLeft /> Back to Blog
           </Link>

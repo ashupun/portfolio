@@ -3,14 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Sun, Moon, ChevronLeft, ChevronRight } from './icons';
-
-interface PaginationProps {
-  page: number;
-  totalPages: number;
-  onPrev: () => void;
-  onNext: () => void;
-  isTransitioning: boolean;
-}
+import { useDock } from './provider';
 
 function HomeIcon() {
   return (
@@ -36,11 +29,12 @@ function ProjectsIcon() {
   );
 }
 
-export function Dock({ variant = 'horizontal', pagination }: { variant?: 'horizontal' | 'vertical'; pagination?: PaginationProps }) {
+export function Dock({ variant = 'horizontal' }: { variant?: 'horizontal' | 'vertical' }) {
   const [dark, setDark] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
+  const { pagination } = useDock();
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
@@ -53,12 +47,7 @@ export function Dock({ variant = 'horizontal', pagination }: { variant?: 'horizo
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        setVisible(currentScrollY < lastScrollY || currentScrollY < 50);
-      } else {
-        setVisible(true);
-      }
+      setVisible(currentScrollY < lastScrollY || currentScrollY < 50);
       setLastScrollY(currentScrollY);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
