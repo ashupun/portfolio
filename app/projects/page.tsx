@@ -51,6 +51,7 @@ const projects = [
     description: "Send love notes to your family, friends or partner.",
     tech: ["Next.js", "Tailwind CSS"],
     github: "https://github.com/ashupun/loving",
+    live: "https://loving.gg",
   },
   {
     title: "bunnyrabb.it",
